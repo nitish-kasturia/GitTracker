@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GitTracker.iml" filepath="$PROJECT_DIR$/GitTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gittracker/gittracker.iml" filepath="$PROJECT_DIR$/gittracker/gittracker.iml" />
     </modules>
   </component>
 </project>
