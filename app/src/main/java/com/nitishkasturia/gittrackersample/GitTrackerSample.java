@@ -12,6 +12,6 @@ public class GitTrackerSample extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        GitTracker.initialize(this, "05abc9eab69e3b38dede24e0c148626d0ce09cab", "GitTracker");
+        GitTracker.initialize(this, "9496bba2396141bc3775d00210d57f0ca8653b60", "GitTracker");
     }
 }
