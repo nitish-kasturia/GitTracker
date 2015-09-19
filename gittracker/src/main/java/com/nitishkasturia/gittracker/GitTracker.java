@@ -2,14 +2,13 @@ package com.nitishkasturia.gittracker;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.parse.FunctionCallback;
 import com.parse.Parse;
-import com.parse.ParseCloud;
-import com.parse.ParseException;
 
-import java.util.HashMap;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Created by Nitish on 15-09-19.
@@ -48,9 +47,21 @@ public class GitTracker {
     }
 
     public void handleUncaughtException(Thread thread, Throwable e) {
-        e.printStackTrace(); // not all Android versions will print the stack trace automatically
-        Log.d("EXCEPTION_TEST", e.toString());
-        //SEND LOG ASYNC AND CLOSE APP
+        e.printStackTrace();
+
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+
+        String exception = sw.toString();
+        try {
+            String encodedException = URLEncoder.encode(exception, "UTF-8");
+            Log.d("EXCEPTION_TEST", encodedException);
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        }
+
+        //TODO: SEND LOG ASYNC AND CLOSE APP
         System.exit(1); // kill off the crashed app
     }
 }
