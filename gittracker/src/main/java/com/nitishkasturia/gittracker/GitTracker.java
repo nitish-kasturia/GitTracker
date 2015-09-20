@@ -2,13 +2,18 @@ package com.nitishkasturia.gittracker;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.parse.FunctionCallback;
 import com.parse.Parse;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 /**
  * Created by Nitish on 15-09-19.
@@ -57,6 +62,19 @@ public class GitTracker {
         try {
             String encodedException = URLEncoder.encode(exception, "UTF-8");
             Log.d("EXCEPTION_TEST", encodedException);
+
+            HashMap<String, Object> params = new HashMap<>();
+            params.put("access_token", mAccessToken);
+            params.put("repo_name", mRepoName);
+            params.put("name", "NAME");
+            params.put("description", "DESCRIPTION");
+            ParseCloud.callFunctionInBackground("issues", params, new FunctionCallback<String>() {
+                @Override
+                public void done(String s, ParseException e) {
+                    Toast.makeText(mContext, s, Toast.LENGTH_LONG).show();
+                }
+            });
+
         } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         }
