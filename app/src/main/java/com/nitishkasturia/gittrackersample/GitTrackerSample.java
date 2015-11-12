@@ -9,9 +9,11 @@ import com.nitishkasturia.gittracker.GitTracker;
  */
 public class GitTrackerSample extends Application {
 
+    private final String GITHUB_ACCESS_KEY = "YOUR GITHUB ACCESS KEY HERE";
+
     @Override
     public void onCreate() {
         super.onCreate();
-        GitTracker.initialize(this, "9496bba2396141bc3775d00210d57f0ca8653b60", "GitTracker");
+        GitTracker.initialize(this, "GITHUB_ACCESS_KEY", "GitTracker");
     }
 }

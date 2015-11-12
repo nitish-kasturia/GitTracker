@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GitTrackerSample</string>
+    <string name="divide_0">DIVIDE BY 0</string>
+    <string name="suggest_a_feature">SUGGEST A FEATURE</string>
 </resources>

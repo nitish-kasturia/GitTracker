@@ -1,52 +1,20 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        android:weightSum="2"
-        tools:context=".MainActivity">
+    <Button
+        android:id="@+id/crash_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+        android:background="@android:color/white"
+        android:onClick="crash"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/divide_0"
+        android:textColor="@color/colorPrimaryDark" />
 
-            <Button
-                android:id="@+id/crash_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@android:color/white"
-                android:onClick="crash"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="DIVIDE BY 0"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@android:color/white"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="SUGGEST A FEATURE"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</FrameLayout>
