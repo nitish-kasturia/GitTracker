@@ -25,8 +25,8 @@ public class GitTracker {
     private String mAccessToken = null;
     private String mRepoName = null;
 
-    public static GitTracker initialize(Context context, String accessToken, String repoName) {
-        mTracker = new GitTracker(context, accessToken, repoName);
+    public static GitTracker initialize(Context context, String accessToken, String repoName, String parseAppId, String parseClientId) {
+        mTracker = new GitTracker(context, accessToken, repoName, parseAppId, parseClientId);
         return mTracker;
     }
 
@@ -34,18 +34,18 @@ public class GitTracker {
         return mTracker;
     }
 
-    private GitTracker(Context context, String accessToken, String repoName) {
+    private GitTracker(Context context, String accessToken, String repoName, String parseAppId, String parseClientId) {
         this.mContext = context;
         this.mAccessToken = accessToken;
         this.mRepoName = repoName;
 
         Parse.enableLocalDatastore(mContext);
-        Parse.initialize(mContext, "60WFWQec13XQz1Reupzu6cSahFiDeg8Hykkcl1iV", "hV3DqExT1CnZ8ORMP1O3vBU5Bz8yf6nMDIlHVCXP");
+        Parse.initialize(mContext, parseAppId, parseClientId);
 
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread thread, Throwable exception) {
-                handleUncaughtException(thread, exception);
+                handleUncaughtException(exception);
             }
         });
 
@@ -62,7 +62,7 @@ public class GitTracker {
         String[] fileList = mContext.fileList();
 
         for (String fileName : fileList) {
-            Log.d("GitTracker", fileName);
+            Log.i("GitTracker", "UPLOADING STACKTRACE FILE: " + fileName);
             fileInputStream = mContext.openFileInput(fileName);
 
             StringBuilder builder = new StringBuilder();
@@ -90,7 +90,7 @@ public class GitTracker {
         }
     }
 
-    public void handleUncaughtException(Thread thread, Throwable exception) {
+    public void handleUncaughtException(Throwable exception) {
         try {
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(mContext.openFileOutput(exception.toString(), 0)));
             exception.printStackTrace(pw);
@@ -103,62 +103,7 @@ public class GitTracker {
         System.exit(1);
     }
 
-    public String getAccessToken() {
-        return mAccessToken;
-    }
-
     public String getRepoName() {
         return mRepoName;
     }
 }
-
-/*
-HashMap<String, Object> params = new HashMap<>();
-        params.put("access_token", mAccessToken);
-        params.put("repo_name", mRepoName);
-        params.put("name", "NAME");
-        params.put("description", "DESCRIPTION");
-        ParseCloud.callFunctionInBackground("issues", params, new FunctionCallback<String>() {
-            @Override
-            public void done(String s, ParseException e) {
-                Toast.makeText(mContext, s, Toast.LENGTH_LONG).show();
-            }
-        });
- */
-
-/*
-public void handleUncaughtException(Thread thread, Throwable exception) {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-
-        exception.printStackTrace();
-        exception.printStackTrace(pw);
-
-        String exceptionString = sw.toString();
-
-        try {
-            String encodedAccessToken = URLEncoder.encode(mAccessToken, "UTF-8");
-            String encodedRepoName = URLEncoder.encode(mRepoName, "UTF-8");
-            String encodedName = URLEncoder.encode(exception.toString(), "UTF-8");
-            String encodedDescription = URLEncoder.encode(exceptionString, "UTF-8");
-
-            final HashMap<String, Object> params = new HashMap<>();
-            params.put("access_token", encodedAccessToken);
-            params.put("repo_name", encodedRepoName);
-            params.put("name", encodedName);
-            params.put("description", encodedDescription);
-
-            new Thread() {
-                @Override
-                public void run() {
-                    ParseCloud.callFunctionInBackground("error", params);
-                }
-            }.start();
-
-//            System.exit(1);
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-    }
- */

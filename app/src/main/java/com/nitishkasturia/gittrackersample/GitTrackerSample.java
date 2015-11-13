@@ -9,11 +9,14 @@ import com.nitishkasturia.gittracker.GitTracker;
  */
 public class GitTrackerSample extends Application {
 
-    private final String GITHUB_ACCESS_KEY = "YOUR GITHUB ACCESS KEY HERE";
+    private final String GITHUB_ACCESS_KEY = "GITHUB ACCESS KEY";
+    private final String GITHUB_REPO_NAME = "GITHUB REPOSITORY NAME";
+    private final String PARSE_APP_ID = "PARSE APPLICATION ID";
+    private final String PARSE_CLIENT_ID = "PARSE CLIENT ID";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        GitTracker.initialize(this, "GITHUB_ACCESS_KEY", "GitTracker");
+        GitTracker.initialize(this, GITHUB_ACCESS_KEY, GITHUB_REPO_NAME, PARSE_APP_ID, PARSE_CLIENT_ID);
     }
 }
