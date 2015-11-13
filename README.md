@@ -8,7 +8,8 @@ Using GitTracker is as simple as adding 1 line of code to your ```Application```
 
 1. Clone GitTracker.API and push it to your Parse project.
 2. Create an access token for GitTracker to access your repository.
-3. Add the following line of code to your ```Application``` class:
+3. Include GitTracker as a library project in your Android application.
+4. Add the following line of code to your ```Application``` class:
 ```java
 GitTracker.initialize(this, GITHUB_ACCESS_KEY, GITHUB_REPO_NAME, PARSE_APP_ID, PARSE_CLIENT_ID);
 ```
